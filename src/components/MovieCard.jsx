@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const MovieCard = ({ movie, onClick }) => {
   return (
     <div
@@ -13,6 +15,16 @@ const MovieCard = ({ movie, onClick }) => {
       <p className="text-gray-600">{movie.Year}</p>
     </div>
   );
+};
+
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    imdbID: PropTypes.string.isRequired, // imdbID should be a required string
+    Poster: PropTypes.string.isRequired, // Poster shoul dbe a required string
+    Title: PropTypes.string.isRequired, // Title should be a required string
+    Year: PropTypes.string.isRequired, // Year should be a required string
+  }).isRequired, // The entire movie object is required
+  onClick: PropTypes.func.isRequired, // onClick should be a required function
 };
 
 export default MovieCard;
