@@ -53,31 +53,6 @@ const App = () => {
 
   return (
     <div className="app container mx-auto p-4">
-      {/*  Render the SearchBar component*/}
-      <SearchBar onSearch={handleSearch} />
-
-      {/* Section to display favorite movies */}
-      <h2 className="text-2xl font-semibold mt-8">Favorite Movies</h2>
-      <MovieList
-        movies={favorites}
-        onClickMovie={handleClickMovie}
-        onToggleFavorite={toggleFavorite}
-        favorites={favorites}
-      />
-
-      {/* Section to display search results */}
-      {loading ? ( // Conditional rendering for loading
-        <div className="text-center my-6 text-blue-500">Loading...</div>
-      ) : (
-        /*  Render the MovieList component*/
-        <MovieList
-          movies={movies}
-          onClickMovie={handleClickMovie}
-          onToggleFavorite={toggleFavorite}
-          favorites={favorites}
-        />
-      )}
-
       {/*  Render the selected movie's details if a movie is selected*/}
       {selectedMovie && (
         <div className="movie-detail mt-8 p-6 border border-gray-300 rounded-lg shadow-xl">
@@ -91,6 +66,34 @@ const App = () => {
             className="mt-4 max-w-full rounded"
           />
         </div>
+      )}
+      {/*  Render the SearchBar component*/}
+      <SearchBar onSearch={handleSearch} />
+
+      {/* Conditionally render favorites section */}
+      {favorites.length > 0 && (
+        <div className="favorites-container border border-gray-300 rounded-lg shadow-lg p-4 mt-8 mb-12">
+          <h2 className="text-2xl font-semibold my-6">Favorite Movies</h2>
+          <MovieList
+            movies={favorites}
+            onClickMovie={handleClickMovie}
+            onToggleFavorite={toggleFavorite}
+            favorites={favorites}
+          />
+        </div>
+      )}
+
+      {/* Section to display search results */}
+      {loading ? ( // Conditional rendering for loading
+        <div className="text-center my-6 text-blue-500">Loading...</div>
+      ) : (
+        /*  Render the MovieList component*/
+        <MovieList
+          movies={movies}
+          onClickMovie={handleClickMovie}
+          onToggleFavorite={toggleFavorite}
+          favorites={favorites}
+        />
       )}
     </div>
   );
